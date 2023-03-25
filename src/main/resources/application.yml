@@ -1,0 +1,74 @@
+server:
+  port: 9802
+  servlet:
+    #    encoding:
+    #      charset: UTF-8
+    #      enabled: true
+    #      force: true
+    context-path: /
+
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  #  config:
+  #    activate:
+  #      on-profile: local
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+    #        open-in-view: false
+    generate-ddl: false
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      # none : ??????. , create : ??? ??, update : ??? ?? ??? ???.
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl   # hibernate? DB Physical Naming ??? ?? ??? ??? ??? ? ???? ??. ??? Spring boot? ???? CamelCase? snakecase???. (@Table? ??? ??? ??)
+    defer-datasource-initialization: true
+  sql:
+    init:
+      encoding: utf-8
+
+
+# log
+logging:
+  level:
+    com: debug
+    org:
+      springframework: debug
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+  config: classpath:logback-spring.xml
+
+
+# ??? ????.
+custom:
+  service:
+    timezone: Asia/Seoul
+    url : http://localhost:9802
+
+#springdoc:
+#  swagger-ui:
+#    path: /swagger-ui.html
+#    use-root-path: true
