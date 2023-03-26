@@ -1,10 +1,6 @@
 server:
-  port: 9802
+  port: 9803
   servlet:
-    #    encoding:
-    #      charset: UTF-8
-    #      enabled: true
-    #      force: true
     context-path: /
 
 
@@ -40,7 +36,7 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       # none : ??????. , create : ??? ??, update : ??? ?? ??? ???.
-      ddl-auto: none
+      ddl-auto: create-drop
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl   # hibernate? DB Physical Naming ??? ?? ??? ??? ??? ? ???? ??. ??? Spring boot? ???? CamelCase? snakecase???. (@Table? ??? ??? ??)
     defer-datasource-initialization: true
@@ -66,9 +62,9 @@ logging:
 custom:
   service:
     timezone: Asia/Seoul
-    url : http://localhost:9802
+    url : http://localhost:9803
 
-#springdoc:
-#  swagger-ui:
-#    path: /swagger-ui.html
-#    use-root-path: true
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    use-root-path: true

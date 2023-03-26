@@ -61,7 +61,7 @@ public class ExtractSchoolNameHandler {
             //특수문자, 불필요단어 정제
             String pureReply = refineReply(reply);
             //정규식을 활용하여 학교이름 추출
-            String schoolName = parseSchoolName(pureReply);
+            String schoolName = extractSchoolName(pureReply);
             //함축어 학교이름 변경 ex) 여고 -> 여자고등학교
             schoolName = modifySchoolName(schoolName).replace(" ", "");
 
@@ -136,7 +136,7 @@ public class ExtractSchoolNameHandler {
             .replaceAll("(?:저희|우리|다른|진짜|제발요|하고|말고|치고)", "");
     }
 
-    private String parseSchoolName(String reply) {
+    private String extractSchoolName(String reply) {
         Matcher matcher = SCHOOL_FULL_PATTERN.matcher(reply);
         String school = "";
 
@@ -199,13 +199,13 @@ public class ExtractSchoolNameHandler {
     private static final Pattern SCHOOL_FULL_PATTERN = Pattern.compile(
         "(?<school>"
             + "[가-힣 ]?[가-힣]*국제학교|"
-            + "[가-힣 ]?[가-힣]*(?:초등학교|초 등학교|초등 학교|초등학 교|초 등 학교|초 등 학 교)|"
             + "[가-힣 ]?[가-힣]*(?: 남자 중학교|남자중학교|남자중 학교|남자중 학 교|남자중학 교)|"
             + "[가-힣 ]?[가-힣]*(?: 여자 중학교|여자중학교| 여자중학교| 여자중 학교|여자중 학교|여자중 학 교|여자중학 교)|"
-            + "[가-힣 ]?[가-힣]*(?: 중학교|중학교|중 학교|중 학 교|중학 교)|"
             + "[가-힣 ]?[가-힣]*(?: 남자고등학교|남자고등학교|남자고 등학교|남자고등 학교|남자고등학 교|남자고 등 학교|남자고 등 학 교)|"
             + "[가-힣 ]?[가-힣]*(?: 여자[a-zA-Z]*고등학교| 여자고등학교|여자고등학교|여자고 등학교|여자고등 학교|여자고등학 교|여자고 등 학교|여자고 등 학 교| 서여자고등학교| 여자 고등학교| 동여자중학교| 여자상업고등학교)|"
             + "[가-힣 ]?[가-힣]*(?: 고등학교|고등학교|고 등학교|고등 학교|고등학 교|고 등 학교|고 등 학 교|체고| 관광고등학교)|"
+            + "[가-힣 ]?[가-힣]*(?:초등학교|초 등학교|초등 학교|초등학 교|초 등 학교|초 등 학 교)|"
+            + "[가-힣 ]?[가-힣]*(?: 중학교|중학교|중 학교|중 학 교|중학 교)|"
             + "[가-힣 ]?[가-힣]*(?: 대학교|대학교|대 학교|대 학 교|대학 교)"
             + ")");
 
