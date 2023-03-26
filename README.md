@@ -9,11 +9,33 @@
 - 프레임워크 : Spring boot 3.0.5
 - 빌드 : Gradle
 - RDBMS : H2
-- Swagger 2.0 적용
-  (각 API의 application.yml에 상세 접근 주소 정리하였습니다.)
+- Swagger 3.0 적용
 
-## 설계 내용
-###[공통]
+## API 명세서 내용
+
+1.**학교 단어 집계 서비스 호출 API**
+  - 댓글.csv 파일
+  - 집계 결과값 파일 위치
+
+
+    URL : **POST** http://localhost:9803/api/v1/aggs/words/schools
+
+**[요청]**
+   <pre class='prettyprint'>
+   Body Param
+      "file" : 댓글.csv,
+      "path" : C:\Users\김윤권\project\result
+</pre>
+**[응답]**
+   <pre class='prettyprint'>
+   {
+    "status": true,
+    "path": "C:\\Users\\김윤권\\project\\result",
+    "totalParseCount": 1000,
+    "successParseCount": 981,
+    "failParseCount": 19
+   }
+</pre>
 
 * * *
 ####[첨부 파일 목록 및 설명]
