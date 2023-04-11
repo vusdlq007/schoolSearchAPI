@@ -71,11 +71,13 @@ public class ExtractSchoolNameHandlerTest {
             contentType,
             "test".getBytes(StandardCharsets.UTF_8)
         );
-
+        //여기서 file에 list를 담음. fileUtils.readCsvToList를 통해 doReturn으로 list를 인자로 수행했다고 가정. 그래서 list가 readCsvToList로 가서 수행되었다고 생각.
         doReturn(list).when(fileUtils).readCsvToList(file);
 
         //when
+        // 실제로 file을 넘기는게 아니라 위에서 mock으로 선언한 fileUtiles의 결과 값으로셋팅된 list가 들어감.
         extractSchoolNameHandler.aggSchoolName(file, filePath);
+        // 행위테스트, save가 3번호출이 되었는지. save 호출간 넘겨받은 인자를 캡쳐해서 꺼내기. (aggSchoolName안에서 3번 호출됨)
         verify(extractLogRepository, Mockito.times(3)).save(logArgumentCaptor.capture());
         List<ExtractLog> logs = logArgumentCaptor.getAllValues();
 
